@@ -72,7 +72,7 @@
         <v-list-item @click.native="right = !right">
           <v-list-item-action>
             <v-icon light>
-              mdi-repeat
+              mdi-repeatS
             </v-icon>
           </v-list-item-action>
           <v-list-item-title>Switch drawer (click me)</v-list-item-title>
