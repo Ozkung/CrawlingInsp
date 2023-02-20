@@ -1,11 +1,9 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
+    <!-- <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
-      fixed
-      app
     >
       <div class="d-flex justify-center my-4">
         <v-toolbar-title>{{ title }}</v-toolbar-title>
@@ -26,15 +24,17 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
-      <v-toolbar-title>{{ title }}</v-toolbar-title>
+    </v-navigation-drawer> -->
+    <v-app-bar :clipped-left="clipped" color="#E53935" fixed app>
+      <!-- <v-app-bar-nav-icon @click="drawer = !drawer" /> -->
+      <v-toolbar-title>
+        <div style="color: #fff; user-select: none" role="button">
+          {{ title }}
+        </div>
+      </v-toolbar-title>
     </v-app-bar>
     <v-main>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-main>
     <v-footer :absolute="!fixed" app>
       <span style="font-size: 12px"
