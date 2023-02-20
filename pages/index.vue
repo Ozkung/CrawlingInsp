@@ -87,14 +87,6 @@ export default {
     justify-content: center;
     align-items: center;
     height: 80%;
-    .login_content {
-      min-width: 340px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 5px;
-      background: #fff;
-    }
   }
 }
 </style>
