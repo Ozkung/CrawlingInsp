@@ -36,8 +36,8 @@
     <v-main>
       <nuxt />
     </v-main>
-    <v-footer :absolute="!fixed" app>
-      <span style="font-size: 12px"
+    <v-footer :absolute="!fixed" color="#E53935" app>
+      <span style="color: #fff; font-size: 12px"
         >&copy;{{ title }} {{ new Date().getFullYear() }}</span
       >
     </v-footer>

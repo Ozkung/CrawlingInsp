@@ -79,7 +79,7 @@ export default {
 
 <style lang="scss" scoped>
 .bg-app_food {
-  background: #ffebee;
+  background: $subMemo;
   height: 100%;
   width: 100%;
   .centerPos {
