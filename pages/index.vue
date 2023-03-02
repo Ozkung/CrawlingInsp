@@ -1,7 +1,13 @@
 <template>
   <div class="bg-app_food">
     <div class="centerPos">
-      <v-card class="mx-auto px-6 py-8" min-width="340">
+      <div class="d-flex justify-center ma-8" style="flex-direction: column">
+        <h1 class="fontTitle">Havememo</h1>
+        <Transition>
+          <b style="font-size: 20px">Community of people who love cooking.</b>
+        </Transition>
+      </div>
+      <v-card class="px-6 py-8" min-width="340">
         <v-form v-model="form" @submit.prevent="onSubmit">
           <v-text-field
             v-model="email"
@@ -37,11 +43,88 @@
           </v-btn>
         </v-form>
         <v-divider class="my-3" />
-        <v-btn block color="#E53935" size="large">
+        <v-btn block color="#E53935" size="large" @click="dialog = !dialog">
           <div style="color: #fff">Create Account</div>
         </v-btn>
       </v-card>
     </div>
+
+    <v-dialog v-model="dialog" min-width="320" max-width="400">
+      <v-card class="py-3 px-4">
+        <h1>Sign Up</h1>
+        <div>
+          <v-form v-model="registor" @submit.prevent="onRegistor">
+            <div class="d-flex">
+              <!-- First Name -->
+              <v-text-field
+                v-model="form_registor.name"
+                :readonly="confirm"
+                :rules="[required]"
+                class="px-1"
+                clearable
+                label="First Name"
+                placeholder="Enter your First Name"
+              ></v-text-field>
+              <!-- Last Name -->
+              <v-text-field
+                v-model="form_registor.lastname"
+                :readonly="confirm"
+                :rules="[required]"
+                class="px-1"
+                clearable
+                label="Lastname"
+                placeholder="Enter your Lastname"
+              ></v-text-field>
+            </div>
+            <div class="px-1">
+              <!-- Username -->
+              <v-text-field
+                v-model="form_registor.username"
+                :readonly="confirm"
+                :rules="[required]"
+                clearable
+                label="Username"
+                placeholder="Enter your Username"
+              ></v-text-field>
+              <!-- Password -->
+              <v-text-field
+                type="password"
+                v-model="form_registor.password"
+                :readonly="confirm"
+                :rules="[required]"
+                clearable
+                label="Password"
+                placeholder="Password"
+              ></v-text-field>
+              <!-- Email -->
+              <v-text-field
+                v-model="form_registor.email"
+                :readonly="confirm"
+                :rules="[required]"
+                clearable
+                label="Email"
+                placeholder="Enter your Email"
+              ></v-text-field>
+            </div>
+            <br />
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="error" @click.native="dialog = false"
+                >Disagree</v-btn
+              >
+              <v-btn
+                color="success"
+                :disabled="!registor"
+                type="submit"
+                variant="elevated"
+                :loading="confirm"
+                >Agree</v-btn
+              >
+            </v-card-actions>
+          </v-form>
+        </div>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -52,10 +135,22 @@ export default {
     email: null,
     password: null,
     loading: false,
+    confirm: false,
+    dialog: false,
+    registor: false,
+    // form registor
+    form_registor: {
+      name: null,
+      lastname: null,
+      username: null,
+      email: null,
+      password: null,
+    },
   }),
 
   methods: {
     async onSubmit() {
+      console.log('this.form :', this.form)
       if (!this.form) return
 
       this.loading = true
@@ -70,6 +165,18 @@ export default {
       console.log('massage from server :', api.data.msg)
       this.loading = false
     },
+    async onRegistor() {
+      if (!this.registor) return
+      this.confirm = true
+
+      let obj = this.form_registor
+      let api = await this.$axios.post(
+        'http://192.168.1.200:8082/api/registor',
+        obj
+      )
+      console.log('massage from server :', api.data.msg)
+      this.confirm = false
+    },
     required(v) {
       return !!v || 'Field is required'
     },
@@ -80,13 +187,28 @@ export default {
 <style lang="scss" scoped>
 .bg-app_food {
   background: $subMemo;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
   .centerPos {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 80%;
+    flex-wrap: wrap-reverse;
   }
+}
+.fontTitle {
+  color: $baseMemo;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
 }
 </style>
