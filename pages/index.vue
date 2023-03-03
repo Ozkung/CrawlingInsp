@@ -2,10 +2,10 @@
   <div class="bg-app_food">
     <div class="centerPos">
       <div class="d-flex justify-center ma-8" style="flex-direction: column">
-        <h1 class="fontTitle">Havememo</h1>
-        <Transition>
-          <b style="font-size: 20px">Community of people who love cooking.</b>
-        </Transition>
+        <h1 class="fontTitle p_fadeIn">Havememo</h1>
+        <b class="p_fadeIn" style="font-size: 20px"
+          >Community of people who love cooking.</b
+        >
       </div>
       <v-card class="px-6 py-8" min-width="340">
         <v-form v-model="form" @submit.prevent="onSubmit">
@@ -100,7 +100,7 @@
               <v-text-field
                 v-model="form_registor.email"
                 :readonly="confirm"
-                :rules="[required]"
+                :rules="[Vemail]"
                 clearable
                 label="Email"
                 placeholder="Enter your Email"
@@ -150,7 +150,6 @@ export default {
 
   methods: {
     async onSubmit() {
-      console.log('this.form :', this.form)
       if (!this.form) return
 
       this.loading = true
@@ -161,8 +160,8 @@ export default {
       let api = await this.$axios.post(
         'http://192.168.1.200:8082/api/login',
         obj
-      )
-      console.log('massage from server :', api.data.msg)
+      )console.log('massage from server :', api.data.msg)
+
       this.loading = false
     },
     async onRegistor() {
@@ -179,6 +178,13 @@ export default {
     },
     required(v) {
       return !!v || 'Field is required'
+    },
+    Vemail(v) {
+      return (
+        !v ||
+        /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+        'E-mail must be valid'
+      )
     },
   },
 }
@@ -202,13 +208,16 @@ export default {
   color: $baseMemo;
 }
 
-.v-enter-active,
-.v-leave-active {
-  transition: opacity 0.5s ease;
+.p_fadeIn {
+  animation: fadeIn 1.5s;
 }
 
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
