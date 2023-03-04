@@ -129,6 +129,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   data: () => ({
     form: false,
@@ -157,23 +158,39 @@ export default {
         username: this.email,
         password: this.password,
       }
-      let api = await this.$axios.post(
-        'http://192.168.1.200:8082/api/login',
-        obj
-      )console.log('massage from server :', api.data.msg)
-
+      let api = await this.$axios.post('http://localhost:8083/api/login', obj)
+      console.log('api :', api)
+      this.$store.commit('saveID', api.data.id)
+      let date = new Date()
+      let time = date.getTime()
+      let expires = time + 172800 * 1000
+      date.setTime(expires)
+      document.cookie =
+        'user_token=' +
+        api.data.token +
+        ';max-age=172800' +
+        ';path=/' +
+        ';secure'
+      if (api.data.msg) console.log('massage from server :', api.data.msg)
+      else console.log('massage from server :', api.data)
       this.loading = false
     },
     async onRegistor() {
       if (!this.registor) return
       this.confirm = true
 
-      let obj = this.form_registor
+      const { name, lastname, username, email, password } = this.form_registor
+      let obj = {
+        displayname: name + ' ' + lastname,
+        username: username,
+        password: password,
+        email: email,
+      }
       let api = await this.$axios.post(
-        'http://192.168.1.200:8082/api/registor',
+        'http://192.168.1.200:8082/api/register',
         obj
       )
-      console.log('massage from server :', api.data.msg)
+      console.log('api :', api)
       this.confirm = false
     },
     required(v) {
