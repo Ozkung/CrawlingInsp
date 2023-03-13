@@ -38,7 +38,25 @@ export default {
     '@nuxtjs/auth-next',
   ],
 
-  auth: {},
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+    },
+    strategies: {
+      local: {
+        token: {
+          property: 'user.access_key',
+          global: true,
+        },
+        endpoints: {
+          login: { url: 'http://localhost:8083/api/login', method: 'post', propertyName: 'user.access_key' },
+          logout: { url: 'http://localhost:8083/api/logout', method: 'delete' },
+          user: { url: 'http://localhost:8083/getUser', method: 'get', propertyName: 'user' }
+        }
+      }
+    }
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
