@@ -48,17 +48,42 @@ export default {
         token: {
           property: 'user.access_key',
           global: true,
+          maxAge: 1800,
+        },
+        refreshToken: {
+          property: 'user.refresh_key',
+          data: 'refreshToken',
+          maxAge: 60 * 60 * 24 * 30,
         },
         endpoints: {
-          login: { url: 'http://localhost:8083/api/login', method: 'post', propertyName: 'user.access_key' },
-          logout: { url: 'http://localhost:8083/api/logout', method: 'delete' },
-          user: { url: 'http://localhost:8083/getUser', method: 'get', propertyName: 'user' }
-        }
-      }
-    }
+          login: {
+            url: 'http://192.168.1.200:8082/api/login',
+            method: 'post',
+            propertyName: 'user.access_key',
+          },
+          logout: {
+            url: 'http://192.168.1.200:8082/api/logout',
+            method: 'delete',
+          },
+          user: {
+            url: 'http://192.168.1.200:8082/getUser',
+            method: 'get',
+            propertyName: 'user',
+          },
+          refresh: {
+            url: 'http://192.168.1.200:8082/extraKeys',
+            method: 'get',
+          },
+        },
+      },
+    },
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+  router: {
+    base: '/',
+  },
+  target: 'static',
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {

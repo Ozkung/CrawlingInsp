@@ -159,17 +159,13 @@ export default {
         password: this.password,
       }
       try {
-        await this.$auth.loginWith('local', { data: obj }).then(async (res) => {
-          console.log('Auth Success')
-          console.log(this.$auth.state.loggedIn)
-        })
-        // console.log('api :', api)
-        // if (api.data.msg) console.log('massage from server :', api.data.msg)
-        // else console.log('massage from server :', api.data)
+        await this.$auth
+          .loginWith('local', { data: obj })
+          .then(async (res) => {})
       } catch (error) {
-        console.log('error :', error);
+        console.log('error :', error)
       }
-      
+
       this.loading = false
     },
     async onRegistor() {
@@ -184,7 +180,7 @@ export default {
         email: email,
       }
       let api = await this.$axios.post(
-        'http://192.168.1.200:8082/api/register',
+        'http://localhost:8083/api/register',
         obj
       )
       console.log('api :', api)
