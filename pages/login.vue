@@ -180,7 +180,7 @@ export default {
         email: email,
       }
       let api = await this.$axios.post(
-        'http://localhost:8083/api/register',
+        'http://192.168.1.200:8082/api/register',
         obj
       )
       console.log('api :', api)
