@@ -57,21 +57,21 @@ export default {
         },
         endpoints: {
           login: {
-            url: 'http://192.168.1.200:8082/api/login',
+            url: 'http://havememo.ddns.net:8082/api/login',
             method: 'post',
             propertyName: 'user.access_key',
           },
           logout: {
-            url: 'http://192.168.1.200:8082/api/logout',
+            url: 'http://havememo.ddns.net:8082/api/logout',
             method: 'delete',
           },
           user: {
-            url: 'http://192.168.1.200:8082/getUser',
+            url: 'http://havememo.ddns.net:8082/getUser',
             method: 'get',
             propertyName: 'user',
           },
           refresh: {
-            url: 'http://192.168.1.200:8082/extraKeys',
+            url: 'http://havememo.ddns.net:8082/extraKeys',
             method: 'get',
           },
         },

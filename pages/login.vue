@@ -180,11 +180,11 @@ export default {
         email: email,
       }
       let api = await this.$axios.post(
-        'http://192.168.1.200:8082/api/register',
+        'http://havememo.ddns.net:8082/api/register',
         obj
       )
-      console.log('api :', api)
       this.confirm = false
+      this.dialog = false
     },
     required(v) {
       return !!v || 'Field is required'
