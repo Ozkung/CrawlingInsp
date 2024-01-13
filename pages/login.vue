@@ -180,7 +180,7 @@ export default {
         email: email,
       }
       let api = await this.$axios.post(
-        'http://havememo.ddns.net:8082/api/register',
+        'http://localhost:8082/api/register',
         obj
       )
       this.confirm = false
