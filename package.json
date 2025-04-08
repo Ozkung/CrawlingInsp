@@ -2,6 +2,12 @@
   "name": "crawlingInsp",
   "version": "1.0.0",
   "private": true,
+  "config": {
+    "nuxt": {
+      "host": "0.0.0.0",
+      "port": "8087"
+    }
+  },
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
@@ -9,8 +15,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "@nuxtjs/auth-next": "5.0.0-1667386184.dfbbb54",
     "@nuxtjs/axios": "^5.13.1",
     "core-js": "^3.9.1",
+    "moment": "^2.29.4",
     "nuxt": "^2.15.3"
   },
   "devDependencies": {

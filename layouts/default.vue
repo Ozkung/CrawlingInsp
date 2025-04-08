@@ -1,12 +1,13 @@
 <template>
-  <v-app dark>
-    <v-navigation-drawer
+  <v-app>
+    <!-- <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
-      fixed
-      app
     >
+      <div class="d-flex justify-center my-4">
+        <v-toolbar-title>{{ title }}</v-toolbar-title>
+      </div>
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -19,28 +20,21 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-toolbar-title>{{ item.title }}</v-toolbar-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <div class="mt-5">
-        
-        <v-switch v-model="$vuetify.theme.dark" inset></v-switch>
-      </div>
+    </v-navigation-drawer> -->
+    <v-app-bar :clipped-left="clipped" color="#E53935" fixed app>
+      <!-- <v-app-bar-nav-icon @click="drawer = !drawer" /> -->
+      <v-toolbar-title>
+        <div style="color: #fff; user-select: none" role="button">
+          {{ title }}
+        </div>
+      </v-toolbar-title>
     </v-app-bar>
     <v-main>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-main>
 
     <!-- <v-footer
